@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+﻿{% extends 'blog/base.html' %}
 
 {% block content %}
     {% for post in posts %}
@@ -8,6 +8,7 @@
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text|linebreaksbr }}</p>
+			<a href="{% url 'post_detail' pk=post.pk %}">Komentarze: {{ post.approved_comments.count }}</a>
         </div>
     {% endfor %}
 {% endblock %}
