@@ -21,12 +21,16 @@ class Post(models.Model):
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 		
+    class Meta:
+        verbose_name = "Post"
+        verbose_name_plural = "Posty"
+		
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
     author = models.CharField(max_length=200, verbose_name="Autor")
     text = models.TextField(verbose_name="Tekst")
     created_date = models.DateTimeField(default=timezone.now, verbose_name="Data")
-    approved_comment = models.BooleanField(default=False)
+    approved_comment = models.BooleanField(default=False, verbose_name="Potwierdzony komentarz")
 
     def approve(self):
         self.approved_comment = True
@@ -34,3 +38,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+		
+    class Meta:
+        verbose_name = "Komentarz"
+        verbose_name_plural = "Komentarze"
